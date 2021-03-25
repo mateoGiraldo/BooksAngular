@@ -1,0 +1,212 @@
+:root {
+    --primary: #007bff !important;
+}
+
+
+/***TABLE***/
+.searchBarGrid {
+    margin: 20px 0px 0px 0px;
+}
+
+.headGrid {
+    background-color: var(--primary) !important;
+    color: var(--light) !important;
+    border-bottom: #f0f5f8 solid 3px;
+    border-top: white solid 2px;
+    font-size: 14px;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+    font-style: italic;
+}
+
+.headGridInternal {
+    background-color: var(--primary) !important;
+    color: white;
+    border-bottom: #f0f5f8 solid 3px;
+    border-top: white solid 2px;
+    font-size: 13px;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+    font-style: italic;
+}
+
+.headGridInternalNoBackground {
+    color: var(--primary);
+    border-bottom: #f0f5f8 solid 3px;
+    border-top: white solid 2px;
+    font-size: 13px;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+    font-style: italic;
+}
+
+.headGrid th {
+    vertical-align: middle !important;
+}
+
+.headGridInternal th {
+    vertical-align: middle !important;
+    padding: 4px;
+}
+
+.headGridInternalNoBackground th {
+    vertical-align: middle !important;
+    padding: 4px;
+    padding-top: 0px;
+}
+
+.actionsGridCol {
+    min-width: 80px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center;
+}
+
+.actionsGridColInternal {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center;
+}
+
+.actionsGrid {
+    text-align: left;
+    font-size: 1.6rem;
+    display: inline;
+    color: gray !important;
+    margin: 0px 2px 0px 2px;
+}
+
+.actionsGrid:hover {
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.6rem;
+    display: inline;
+    color: var(--primary) !important;
+    margin: 0px 2px 0px 2px;
+}
+
+.actionsGridDanger:hover {
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.6rem;
+    display: inline;
+    color: var(--danger) !important;
+    margin: 0px 2px 0px 2px;
+}
+
+
+.actionsGridInternal {
+    text-align: left;
+    font-size: 14px;
+    display: inline;
+    color: gray !important;
+    margin: 0px 2px 0px 2px;
+}
+
+
+
+.actionsGrid a {
+    cursor: pointer;
+}
+
+.obligatory {
+    color: #001b4a;
+}
+
+
+.rowTable {
+    cursor: pointer;
+    color: var(--primary) !important;
+    font-size: 13px;
+    font-weight: 100;
+}
+
+.rowTableInternal {
+    color: var(--primary) !important;
+    font-size: 13px;
+    font-weight: 100;
+}
+
+.rowTable:hover {
+    background-color: #f6f6f6;
+}
+
+.rowTable td {
+    border: 0 !important;
+    vertical-align: middle !important;
+    font-weight: 300;
+}
+
+.odd {
+    background-color: #fcfcfc;
+}
+
+.table td, .table th {
+    vertical-align: middle !important;
+}
+
+/***END TABLE***/
+
+
+
+/*Tooltip*/
+
+
+.tooltip > .tooltip-inner {
+    background-color: var(--primary);
+}
+
+.tooltip > .tooltip-arrow {
+    border-bottom-color: var(--primary);
+}
+
+/*Tooltip*/
+
+
+/***Modal*****/
+.customModalHeader {
+    background-color: #f0f5f8 !important;
+    color: var(--dark) !important;
+    font-weight: 100 !important;
+    font-size: 24px !important;
+    border-bottom: 0 !important;
+    display: inline !important;
+    padding: 10px 10px 0px 24px !important;
+}
+
+    .customModalHeader .obligatoryText {
+        font-size: 14px !important;
+    }
+
+    .customModalHeader .close {
+        float: right !important;
+        font-size: 35px !important;
+        font-weight: 100 !important;
+        line-height: 1 !important;
+        color: #000 !important;
+        text-shadow: none !important;
+        margin: -1rem 0rem -1rem auto !important;
+    }
+
+.modal-content {
+    border-radius: 3px !important;
+}
+
+.modal-body {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+    padding-bottom: 5px !important;
+}
+
+.modal-bodyInternal {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 10px !important;
+}
+
+@media (min-width: 1024px) {
+    .modal-lg {
+        min-width: 1000px;
+    }
+}
+/***Modal*****/

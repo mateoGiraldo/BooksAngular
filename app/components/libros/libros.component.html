@@ -1,0 +1,201 @@
+<!-- Content page -->
+<div class="container-fluid">
+
+    <h4>Libros</h4>
+    <div class="row">
+        <div class="col buttonAlign align-self-center">
+            <button type="button" class="btn btn-primary"
+                (click)="LibrosModal.show(); customModalTitle = 'Nuevo libro'; isNewRegister = true;">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Nuevo libro
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="Libro.length == 0" id="divMensajeFiltro" class="text-center">
+        <p class="Filtrolabel">
+            No se encontró información...
+        </p>
+    </div>
+
+
+    <div [ngClass]="{'d-none' : Libro.length == 0}">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-12">
+
+
+                <div class="table-responsive">
+                    <table id="tblLibros" datatable [dtOptions]="dtLibrosOptions" [dtTrigger]="dtLibrosTrigger"
+                        class="table tabletop" style="width: 100%!important">
+                        <thead class="headGrid">
+                            <tr>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Editorial</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Precio Sugerido</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let obj of Libro">
+                                <td>
+                                    <div class="actionsGrid custom-tooltip cursor-pointer"
+                                        (click)="editarLibro(obj.id);" tooltip="Editar libro" placement="top">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                                <td>{{ obj.id }}</td>
+                                <td>{{ obj.titulo }}</td>
+                                <td scope="col">{{obj.autor}}</td>
+                                <td scope="col">{{obj.nombreEditorial}}</td>
+                                <td scope="col">{{obj.fechaLocal | date:'short'}}</td>
+                                <td scope="col">{{obj.costo}}</td>
+                                <td scope="col">{{obj.precioSugerido}}</td>
+                                <td>
+                                    <div class="actionsGrid actionsGridDanger custom-tooltip cursor-pointer"
+                                        (click)="eliminarLibro(obj.id);" tooltip="Eliminar libro" placement="top">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div bsModal #LibrosModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    [config]="{ animated: true, ignoreBackdropClick:true }" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header customModalHeader">
+                <div id="divHeader">
+                    <div class="row">
+                        <div class="col">
+                            <h4 id="dialog-sizes-name1" class="modal-title">{{customModalTitle}}</h4>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="close" (click)="LibrosModal.hide(); clearForm();"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="obligatoryText">
+                        Los campos marcados con (*) son de <b>carácter obligatorio</b> por lo cual deben ser
+                        diligenciados en
+                        su totalidad.
+                    </p>
+                </div>
+            </div>
+
+            <form id="registration-form" [formGroup]="registerForm" (ngSubmit)="onSubmitModal()">
+
+                <div class="modal-body">
+                    <div id="divPrincipal">
+                        <div class="row">
+                            <div class="col">
+                                <div class="sectionFormTittle">Datos del libro</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 leftSeparator">
+                                <div class="form-group">
+                                    <label for="txtLibroName" class="customTittleLabel">
+                                        Título<span class="obligatory">*</span>
+                                    </label>
+                                    <input tabindex="1" data-validation="required"
+                                        data-validation-error-msg="Este campo es obligatorio" type="text"
+                                        class="form-control form-control-sm customInput" id="txtNombreLibro"
+                                        formControlName="titulo" maxlength="1000" placeholder="Ingresa el título"
+                                        [ngClass]="{ 'is-invalid': submittedRegisterForm && f.titulo.errors }" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 leftSeparator">
+                                <div class="form-group">
+                                    <label for="txtAutor" class="customTittleLabel">Autor </label>
+                                    <input tabindex="2" type="text" class="form-control form-control-sm customInput"
+                                        id="txtAutor" formControlName="autor" maxlength="20"
+                                        placeholder="Ingresa el autor" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 leftSeparator">
+                                <label for="ddlEditorial" class="customTittleLabel">
+                                    Editorial<span class="obligatory">*</span>
+                                </label>
+                                <select tabindex="3" id="ddlEditorial" formControlName="editorialId"
+                                    data-live-search="true"
+                                    class="selectpicker show-tick form-control form-control-sm customInput"
+                                    [ngClass]="{ 'is-invalid': submittedRegisterForm && f.editorialId.errors }">
+                                    <option value="">-- Seleccione --</option>
+                                    <option *ngFor="let s of combos.editoriales" [ngValue]="s.id">{{ s.value }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 leftSeparator">
+                                <div class="form-group">
+                                    <label for="dtFecha" class="customTittleLabel">Fecha</label>
+                                    <input readonly [isDisabled]="isDisabled" tabindex="4" type="text"
+                                        class="form-control form-control-sm customInput" id="dtFecha"
+                                        formControlName="fecha" bsDatepicker [bsConfig]="bsOptions" placement="top" />
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 leftSeparator">
+                                <div class="form-group">
+                                    <label for="txtCosto" class="customTittleLabel">Costo</label>
+                                    <input tabindex="5" type="number" min="0"
+                                        class="form-control form-control-sm customInput" id="txtCosto"
+                                        formControlName="costo" maxlength="20" placeholder="Ingresa el costo" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 leftSeparator">
+                                <div class="form-group">
+                                    <label for="txtPrecio" class="customTittleLabel">Precio</label>
+                                    <input tabindex="6" type="number" min="0"
+                                        class="form-control form-control-sm customInput" id="txtPrecio"
+                                        formControlName="precioSugerido" maxlength="20"
+                                        placeholder="Ingresa el precio" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer" id="divFooter">
+                    <div class="col-md-12 col-sm-12" style="text-align: right">
+                        <button type="button" class="btn buttonOutline mr-1" aria-label="Close"
+                            (click)="LibrosModal.hide(); clearForm();">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
